@@ -1,0 +1,3 @@
+.container {
+  @apply gap-2 p-2 h-screen;
+}

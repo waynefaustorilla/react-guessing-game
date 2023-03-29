@@ -1,0 +1,7 @@
+.card {
+  @apply border border-purple-500 p-4 rounded;
+}
+
+.check {
+  @apply mx-2;
+}

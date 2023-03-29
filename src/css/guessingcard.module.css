@@ -1,0 +1,4 @@
+.guessingCard {
+  @apply flex items-center justify-evenly flex-col border rounded border-purple-500;
+  height: calc(100svh - 16px);
+}

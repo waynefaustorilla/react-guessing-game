@@ -1,0 +1,11 @@
+.container {
+  @apply flex;
+}
+
+.input {
+  @apply border rounded-l rounded-r-none border-purple-500 p-4;
+}
+
+.button {
+  @apply bg-purple-500 rounded-r text-white p-4 !important;
+}
