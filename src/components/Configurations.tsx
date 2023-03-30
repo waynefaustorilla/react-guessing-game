@@ -19,7 +19,13 @@ const Configurations: FunctionComponent = (): JSX.Element => {
   return (
     <div className={styles.card}>
       <div className={styles.listItem}>
-        <input type="checkbox" name="hints" checked={hints} className={styles.check} onClick={handleCheck}/>
+        <input
+          type="checkbox"
+          name="hints"
+          defaultChecked={hints}
+          className={styles.check}
+          onClick={handleCheck}
+        />
         <span>Enable Hints</span>
       </div>
     </div>

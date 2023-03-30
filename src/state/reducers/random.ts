@@ -12,6 +12,7 @@ const randomSlice = createSlice({
     tries: 0,
     guess: 0,
     maximum: 0,
+    message: "",
     difficulty: {
       easy: 100,
       medium: 1_000,
@@ -46,6 +47,18 @@ const randomSlice = createSlice({
     },
     toggleHint: (state) => {
       state.hints = !state.hints;
+    },
+    incrementTries: (state) => {
+      state.tries += 1;
+    },
+    resetTries: (state) => {
+      state.tries = 0;
+    },
+    setMessage: (state, { payload }) => {
+      state.message = payload;
+    },
+    setGuess: (state, { payload }) => {
+      state.guess = payload;
     }
   }
 });

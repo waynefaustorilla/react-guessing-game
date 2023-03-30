@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { Fragment, FunctionComponent } from "react";
 import Configurations from "./components/Configurations";
 import DifficultyCard from "./components/DifficultyCard";
 import GuessingCard from "./components/GuessingCard";
@@ -10,7 +10,7 @@ import GuessingBox from "./components/GuessingBox";
 import GuessComponent from "./components/GuessComponent";
 
 const Application: FunctionComponent = (): JSX.Element => {
-  const { hints, maximum, guess } = useSelector((state: RootState) => state.random);
+  const { hints, maximum, guess, tries } = useSelector((state: RootState) => state.random);
 
   return (
     <div className={"p-2"}>
@@ -37,10 +37,15 @@ const Application: FunctionComponent = (): JSX.Element => {
                 guess !== 0 ?
                   <GuessComponent />
                   :
-                  <>
-                    <p className={"text-center"}>Welcome to my Guessing Game made with React.</p>
-                    <p className={"text-center"}>Enter a number between 0 to {maximum}.</p>
-                  </>
+                  tries < 10 ?
+                    <Fragment>
+                      <p className={"text-center"}>Welcome to my Guessing Game made with React.</p>
+                      <p className={"text-center"}>Enter a number between 0 to {maximum}.</p>
+                    </Fragment>
+                    :
+                    <Fragment>
+                      <p className={"text-center"}>Game Over!</p>
+                    </Fragment>
               }
             </h1>
 
