@@ -34,10 +34,6 @@ const GuessingBox: FunctionComponent = (): JSX.Element => {
     }
   };
 
-  // const handleReset = (event: ClickEve) => {
-
-  // };
-
   const GuessButton: FunctionComponent = (): JSX.Element => {
     return (
       <button type={"submit"} className={`${styles.button} ${isDisabled() ? "bg-gray-300" : null}`}>
