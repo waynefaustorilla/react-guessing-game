@@ -3,11 +3,11 @@ import { useSelector } from "react-redux";
 import { RootState } from "../state/store";
 
 const GuessComponent: FunctionComponent = (): JSX.Element => {
-  const { message } = useSelector((state: RootState) => state.random);
+  const { messages } = useSelector((state: RootState) => state.random);
 
   return (
     <Fragment>
-      <p>{message}</p>
+      <p>{messages[0]}</p>
     </Fragment>
   );
 };

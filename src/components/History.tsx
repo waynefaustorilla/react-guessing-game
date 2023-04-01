@@ -1,20 +1,28 @@
-import React, { FunctionComponent } from "react";
+import React, { Fragment, FunctionComponent } from "react";
 import styles from "./../css/history.module.css";
+import { useSelector } from "react-redux";
+import { RootState } from "../state/store";
 
 const History: FunctionComponent = (): JSX.Element => {
+  const { messages } = useSelector((state: RootState) => state.random);
+
   return (
-    <ul className={styles.card}>
-      <li className={styles.list}>Number is lesser than 100</li>
-      <li className={styles.list}>Number is more than 1</li>
-      <li className={styles.list}>Number is lesser than 100</li>
-      <li className={styles.list}>Number is more than 1</li>
-      <li className={styles.list}>Number is lesser than 100</li>
-      <li className={styles.list}>Number is more than 1</li>
-      <li className={styles.list}>Number is lesser than 100</li>
-      <li className={styles.list}>Number is more than 1</li>
-      <li className={styles.list}>Number is lesser than 100</li>
-      <li className={styles.list}>Number is more than 1</li>
-    </ul>
+    <Fragment>
+      {
+        messages.length < 1 ?
+          null
+          :
+          <ul className={styles.card}>
+            {
+              messages.map((message, index) => {
+                return (
+                  <li className={styles.list} key={index}>{message}</li>
+                );
+              })
+            }
+          </ul>
+      }
+    </Fragment>
   );
 };
 

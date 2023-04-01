@@ -4,10 +4,9 @@ import { randomActions } from "../state/reducers/random";
 import { RootState } from "../state/store";
 import styles from "./../css/guessingbox.module.css";
 
-const { incrementTries, setMessage, setGuess } = randomActions;
-
 const GuessingBox: FunctionComponent = (): JSX.Element => {
-  const { maximum, tries, number, guess } = useSelector((state: RootState) => state.random);
+  const { incrementTries, setMessage, setGuess, resetState } = randomActions;
+  const { maximum, tries, number, guess, messages } = useSelector((state: RootState) => state.random);
 
   const dispatch = useDispatch();
 
@@ -35,6 +34,26 @@ const GuessingBox: FunctionComponent = (): JSX.Element => {
     }
   };
 
+  // const handleReset = (event: ClickEve) => {
+
+  // };
+
+  const GuessButton: FunctionComponent = (): JSX.Element => {
+    return (
+      <button type={"submit"} className={`${styles.button} ${isDisabled() ? "bg-gray-300" : null}`}>
+        Guess
+      </button>
+    );
+  };
+
+  const ResetButton: FunctionComponent = (): JSX.Element => {
+    return (
+      <button type={"button"} className={`${styles.button} ${isDisabled() ? "bg-gray-300" : null}`} onClick={() => dispatch(resetState())}>
+        Play Again
+      </button>
+    );
+  };
+
   return (
     <form className={styles.container} onSubmit={handleTry}>
       <input
@@ -44,16 +63,14 @@ const GuessingBox: FunctionComponent = (): JSX.Element => {
         min={1}
         max={maximum}
         className={`${styles.input} ${isDisabled() ? "bg-gray-300" : null}`}
-        disabled={isDisabled()}
       />
 
-      <button
-        type={"submit"}
-        className={`${styles.button} ${isDisabled() ? "bg-gray-300" : null}`}
-        disabled={isDisabled()}
-      >
-          Guess
-      </button>
+      {
+        (tries >= 10) || (messages[0] === "That's correct! You win.") ?
+          <ResetButton />
+          :
+          <GuessButton />
+      }
     </form>
   );
 };

@@ -3,14 +3,22 @@ import Configurations from "./components/Configurations";
 import DifficultyCard from "./components/DifficultyCard";
 import GuessingCard from "./components/GuessingCard";
 import History from "./components/History";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./state/store";
 import InfoCard from "./components/InfoCard";
 import GuessingBox from "./components/GuessingBox";
 import GuessComponent from "./components/GuessComponent";
+import { randomActions } from "./state/reducers/random";
 
 const Application: FunctionComponent = (): JSX.Element => {
   const { hints, maximum, guess, tries } = useSelector((state: RootState) => state.random);
+  const { setDifficulty } = randomActions;
+
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(setDifficulty("EASY"));
+  }, []);
 
   return (
     <div className={"p-2"}>

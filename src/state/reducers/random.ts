@@ -4,22 +4,39 @@ const randomize = (maximum: number) => {
   return Math.floor(Math.random() * maximum);
 };
 
+interface InitialProps {
+  number: number,
+  hints: boolean,
+  tries: number,
+  guess: number,
+  maximum: number,
+  messages: string[],
+  difficulty: {
+    easy: number,
+    medium: number,
+    hard: number,
+    expert: number,
+  }
+}
+
+const initial: InitialProps = {
+  number: 0,
+  hints: false,
+  tries: 0,
+  guess: 0,
+  maximum: 0,
+  messages: [],
+  difficulty: {
+    easy: 100,
+    medium: 1_000,
+    hard: 100_000,
+    expert: 1_000_000,
+  }
+};
+
 const randomSlice = createSlice({
   name: "random",
-  initialState: {
-    number: 0,
-    hints: false,
-    tries: 0,
-    guess: 0,
-    maximum: 0,
-    message: "",
-    difficulty: {
-      easy: 100,
-      medium: 1_000,
-      hard: 100_000,
-      expert: 1_000_000,
-    }
-  },
+  initialState: initial,
   reducers: {
     setDifficulty: (state, { payload }) => {
       const { easy, medium, hard, expert } = state.difficulty;
@@ -55,10 +72,15 @@ const randomSlice = createSlice({
       state.tries = 0;
     },
     setMessage: (state, { payload }) => {
-      state.message = payload;
+      state.messages.unshift(payload);
     },
     setGuess: (state, { payload }) => {
       state.guess = payload;
+    },
+    resetState: (state) => {
+      state.number = randomize(state.maximum);
+      state.tries = 0;
+      state.messages = [];
     }
   }
 });
