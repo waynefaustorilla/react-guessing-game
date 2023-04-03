@@ -5,17 +5,18 @@ const randomize = (maximum: number) => {
 };
 
 interface InitialProps {
-  number: number,
-  hints: boolean,
-  tries: number,
-  guess: number,
+  number: number;
+  hints: boolean;
+  tries: number;
+  guess: number;
+  hasWon: boolean;
   maximum: number,
-  messages: string[],
+  messages: string[];
   difficulty: {
-    easy: number,
-    medium: number,
-    hard: number,
-    expert: number,
+    easy: number;
+    medium: number;
+    hard: number;
+    expert: number;
   }
 }
 
@@ -25,12 +26,13 @@ const initial: InitialProps = {
   tries: 0,
   guess: 0,
   maximum: 0,
+  hasWon: false,
   messages: [],
   difficulty: {
     easy: 100,
-    medium: 1_000,
-    hard: 100_000,
-    expert: 1_000_000,
+    medium: 1000,
+    hard: 100000,
+    expert: 1000000,
   }
 };
 
@@ -81,6 +83,10 @@ const randomSlice = createSlice({
       state.number = randomize(state.maximum);
       state.tries = 0;
       state.messages = [];
+      state.hasWon = false;
+    },
+    setWon: (state) => {
+      state.hasWon = true;
     }
   }
 });

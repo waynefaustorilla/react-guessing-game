@@ -5,8 +5,8 @@ import { RootState } from "../state/store";
 import styles from "./../css/guessingbox.module.css";
 
 const GuessingBox: FunctionComponent = (): JSX.Element => {
-  const { incrementTries, setMessage, setGuess, resetState } = randomActions;
-  const { maximum, tries, number, guess, messages } = useSelector((state: RootState) => state.random);
+  const { incrementTries, setMessage, setGuess, resetState, setWon } = randomActions;
+  const { maximum, tries, number, guess, hasWon } = useSelector((state: RootState) => state.random);
 
   const dispatch = useDispatch();
 
@@ -30,7 +30,8 @@ const GuessingBox: FunctionComponent = (): JSX.Element => {
     } else if (guess > number) {
       dispatch(setMessage(`${guess} is too high. Try again.`));
     } else {
-      dispatch(setMessage(`That's correct! You win.`));
+      dispatch(setMessage("Congratulations! You won."));
+      dispatch(setWon());
     }
   };
 
@@ -44,7 +45,7 @@ const GuessingBox: FunctionComponent = (): JSX.Element => {
 
   const ResetButton: FunctionComponent = (): JSX.Element => {
     return (
-      <button type={"button"} className={`${styles.button} ${isDisabled() ? "bg-gray-300" : null}`} onClick={() => dispatch(resetState())}>
+      <button type={"button"} className={styles.button} onClick={() => dispatch(resetState())}>
         Play Again
       </button>
     );
@@ -62,7 +63,7 @@ const GuessingBox: FunctionComponent = (): JSX.Element => {
       />
 
       {
-        (tries >= 10) || (messages[0] === "That's correct! You win.") ?
+        tries >= 10 || hasWon ?
           <ResetButton />
           :
           <GuessButton />
