@@ -42,7 +42,7 @@ const Application: FunctionComponent = (): JSX.Element => {
           <GuessingCard>
             <h1 className={"text-3xl"}>
               {
-                guess !== 0 ?
+                tries > 0 ?
                   <GuessComponent />
                   :
                   tries < 10 ?

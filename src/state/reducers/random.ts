@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const randomize = (maximum: number) => {
-  return Math.floor(Math.random() * maximum);
+  return Math.floor(Math.random() * (maximum + 1));
 };
 
 interface InitialProps {
@@ -84,6 +84,7 @@ const randomSlice = createSlice({
       state.tries = 0;
       state.messages = [];
       state.hasWon = false;
+      state.guess = 0;
     },
     setWon: (state) => {
       state.hasWon = true;

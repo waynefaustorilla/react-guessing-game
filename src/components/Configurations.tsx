@@ -22,9 +22,9 @@ const Configurations: FunctionComponent = (): JSX.Element => {
         <input
           type="checkbox"
           name="hints"
-          defaultChecked={hints}
+          checked={hints}
           className={styles.check}
-          onClick={handleCheck}
+          onChange={handleCheck}
         />
         <span>Enable Hints</span>
       </div>

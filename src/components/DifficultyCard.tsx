@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import styles from "./../css/difficultycard.module.css";
-import { useDispatch } from "react-redux/es/exports";
+import { useDispatch } from "react-redux";
 import { randomActions } from "../state/reducers/random";
 import DifficultySelector from "./DifficultySelector";
 import { useSelector } from "react-redux";
@@ -9,26 +9,22 @@ import { RootState } from "../state/store";
 const DifficultyCard: FunctionComponent = (): JSX.Element => {
   const dispatch = useDispatch();
 
-  const { number } = useSelector((state: RootState) => state.random);
-
-  React.useEffect(() => {
-    dispatch(randomActions.setDifficulty("EXPERT"));
-  }, []);
+  const { maximum, difficulty } = useSelector((state: RootState) => state.random);
 
   const isEasy = () => {
-    return number > 1 && number < 100;
+    return maximum === difficulty.easy;
   };
 
   const isMedium = () => {
-    return number > 100 && number < 1_000;
+    return maximum === difficulty.medium;
   };
 
   const isHard = () => {
-    return number > 1_000 && number < 100_000;
+    return maximum === difficulty.hard;
   };
 
   const isExpert = () => {
-    return number > 100_000 && number < 1_000_000;
+    return maximum === difficulty.expert;
   };
 
   return (
