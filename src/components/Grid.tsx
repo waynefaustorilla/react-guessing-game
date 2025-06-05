@@ -8,7 +8,10 @@ interface Props {
 
 const Grid: FunctionComponent<Props> = ({ columns, children }: Props): JSX.Element => {
   return (
-    <div className={`grid grid-cols-${columns} ${styles.container}`}>
+    <div
+      className={`grid ${styles.container}`}
+      style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
+    >
       {children}
     </div>
   );

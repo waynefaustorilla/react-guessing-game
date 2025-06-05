@@ -14,11 +14,9 @@ const History: FunctionComponent = (): JSX.Element => {
           :
           <ul className={styles.card}>
             {
-              messages.map((message, index) => {
-                return (
-                  <li className={styles.list} key={index}>{message}</li>
-                );
-              })
+              messages.map((message: string) => (
+                <li className={styles.list} key={message}>{message}</li>
+              ))
             }
           </ul>
       }
