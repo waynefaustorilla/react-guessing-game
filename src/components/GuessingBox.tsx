@@ -11,13 +11,14 @@ const GuessingBox: FunctionComponent = (): JSX.Element => {
   const dispatch = useDispatch();
 
   const isDisabled = () => {
-    return tries >= 10;
+    return tries >= 10 || hasWon;
   };
 
   const handleChange = (event: ChangeEvent) => {
     const { value } = event.target as HTMLInputElement;
+    const numeric = parseInt(value);
 
-    dispatch(setGuess(parseInt(value)));
+    dispatch(setGuess(isNaN(numeric) ? 0 : numeric));
   };
 
   const handleTry = (event: FormEvent) => {
@@ -37,7 +38,7 @@ const GuessingBox: FunctionComponent = (): JSX.Element => {
 
   const GuessButton: FunctionComponent = (): JSX.Element => {
     return (
-      <button type={"submit"} className={`${styles.button} ${isDisabled() ? "bg-gray-300" : null}`}>
+      <button type={"submit"} className={`${styles.button} ${isDisabled() ? "bg-gray-300" : null}`} disabled={isDisabled()}>
         Guess
       </button>
     );
@@ -55,10 +56,11 @@ const GuessingBox: FunctionComponent = (): JSX.Element => {
     <form className={styles.container} onSubmit={handleTry}>
       <input
         type={"number"}
-        defaultValue={guess}
+        value={guess}
         onChange={handleChange}
-        min={1}
+        min={0}
         max={maximum}
+        disabled={isDisabled()}
         className={`${styles.input} ${isDisabled() ? "bg-gray-300" : null}`}
       />
 
