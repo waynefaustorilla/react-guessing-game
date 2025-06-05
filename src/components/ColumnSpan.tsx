@@ -7,7 +7,10 @@ interface Props {
 
 const ColumnSpan: FunctionComponent<Props> = ({ columns, children }: Props): JSX.Element => {
   return (
-    <div className={`col-span-${columns} w-full`}>
+    <div
+      className="w-full"
+      style={{ gridColumn: `span ${columns} / span ${columns}` }}
+    >
       {children}
     </div>
   );

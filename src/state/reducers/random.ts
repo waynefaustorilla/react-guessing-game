@@ -75,6 +75,9 @@ const randomSlice = createSlice({
     },
     setMessage: (state, { payload }) => {
       state.messages.unshift(payload);
+      if (state.messages.length > 20) {
+        state.messages.pop();
+      }
     },
     setGuess: (state, { payload }) => {
       state.guess = payload;
